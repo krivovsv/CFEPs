@@ -37,14 +37,14 @@ def comp_Zca(lx, a, dt=1, strict=False, dx=1e-3, zcmin=1e-8, mindx=1e-3):
     return lx,ly 
     
 def comp_diffusion_euler(force,D,dt,nsteps,isave=10,x0=0):
-    import random,numpy
+    import numpy
     dt0=dt/isave
     x=x0
     traj=numpy.zeros((nsteps),'f')
     for istep in range(nsteps):
         for isteps2 in range(isave):
             sigma=(2*D(x)*dt0)**0.5
-            dw=random.gauss(0,sigma)
+            dw=numpy.random.normal(0,sigma)
             x=x+force(x)*dt0+dw
         traj[istep]=x
     return traj
